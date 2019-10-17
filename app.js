@@ -3,21 +3,33 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var hbs = require("hbs")
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
-var productRouter = require('./routes/product');
+var indexRouter = require('./controllers/index');
+var usersRouter = require('./controllers/users');
+var productRouter = require('./controllers/product');
+var orderRouter = require('./controllers/order');
+var loginRouter = require("./controllers/login")
 
 var app = express();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'ejs');
+app.set('view engine', 'hbs');
 
 app.use(logger('dev'));
 app.use(express.json()); //json
 app.use(express.urlencoded({ extended: false })); //form
-app.use(cookieParser());
+var session = require('express-session');
+
+//cookie 字符串转成json
+app.use(cookieParser('qf'));
+//配置express服务器session
+app.use(session({
+    secret: 'qf',//与cookieParser中的一致
+    resave: true,
+    saveUninitialized:true
+}));
 
 //静态的文件直接返回，不通过路由处理
 app.use(express.static(path.join(__dirname, 'public')));
@@ -26,6 +38,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use("/product",productRouter)
+app.use("/order",orderRouter)
+app.use("/login",loginRouter)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
