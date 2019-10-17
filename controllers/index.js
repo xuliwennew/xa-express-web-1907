@@ -1,7 +1,8 @@
 var express = require('express');
 var router = express.Router();
 
-/* GET home page. */
+ //session 单机 cluster
+//分布式 redis
 router.get('/', function(req, res, next) {
   //首先要判断用户的登录状态
   let user = req.session.userInfo;
@@ -12,5 +13,6 @@ router.get('/', function(req, res, next) {
   }
 
 });
+
 
 module.exports = router;

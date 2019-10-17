@@ -1,0 +1,75 @@
+express
+1.api restfual api
+  res.json jsonp
+2.模板 ejs hbs
+
+express pug
+
+html
+  h1
+    span
+
+sass
+a.sass
+a.scss
+
+mvc
+
+index.html view
+index.css  style
+index.js   logic
+
+document.querySelector("")
+ajax -> array
+es6 `${} asdfasdfa  `
+var html
+html += ""
+
+前端设计 view
+MVC :
+Model(数据Map)
+View (视图UI)
+Controller : 控制器(view逻辑)
+
+angular vue mvc
+spring mvc
+laravel mvc
+jdango mvc
+express mvc
+
+
+mvc model 和 view 分离
+model 和view 变化的
+1.view 里面只有html
+2.controller只被动负责view的逻辑,
+ controller中不能有数据
+3.model负责的是数据的map
+
+restful api
+nodejs c++
+graphql 按需求获取数据
+
+session 会话
+sessonStorage localstorage
+cookie
+图片
+crawler
+
+1.session是存储在服务器上的一个会话追踪对象，sesseionid 存储在cookie中
+2.session有过期时间的 30
+3.对有权限访问的资源进行控制
+
+
+user
+name
+
+30 session
+
+jsp
+php
+
+express中使用session
+
+
+
+
