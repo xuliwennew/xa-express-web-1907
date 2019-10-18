@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{title}}</title>
+    <script type="text/javascript" charset="utf-8" src="/ueditor/ueditor.config.js"></script>
+    <script type="text/javascript" charset="utf-8" src="/ueditor/ueditor.all.min.js"> </script>
+    <script type="text/javascript" charset="utf-8" src="/ueditor/lang/zh-cn/zh-cn.js"> </script>
+    <style type="text/css">
+        div{
+            width:100%;
+        }
+    </style>
+ </head>
+<body>
+
+{{{body}}}
+
+<script>
+      var ue = UE.getEditor('editor');
+      function getContent() {
+          var arr = [];
+          arr.push("使用editor.getContent()方法可以获得编辑器的内容");
+          arr.push("内容为：");
+          arr.push(UE.getEditor('editor').getContent());
+          alert(arr.join("\n"));
+      }
+</script>
+</body>
+</html>

@@ -9,7 +9,7 @@ router.get("/", (req, res) => {
     if (user) {
         res.redirect("/")
     } else {
-        res.render("login", {})
+        res.render("admin/login", {layout:null})
     }
 
 })
@@ -24,8 +24,11 @@ router.post("/check", (req, res) => {
     //如果用户登录成功，需要把用户的信息保存到session
     req.session.userInfo = user;
 
-    //转到index
-    res.redirect("/")
+    //restful api json
+    res.json({
+        code:200,
+        msg:"登录成功了"
+    })
 
 })
 
