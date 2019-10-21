@@ -3,40 +3,29 @@ var router = express.Router();
 const path = require("path")
 const ueditor = require("ueditor")
 
- //session 单机 cluster
+//session 单机 cluster
 //分布式 redis
-router.get('/', function(req, res, next) {
-  //首先要判断用户的登录状态
-  let user = req.session.userInfo;
-  if(user){
-      res.render('admin/login', {   user:user });
-  }else{
-    res.redirect("/login")
-  }
+router.get('/', function (req, res) {
+    //首先要判断用户的登录状态
+    let user = req.session.userInfo;
+    if (user) {
+        console.log(user)
+        res.render('index', {layout: null, user: user});
+    } else {
+        res.redirect("/login")
+    }
 
 });
 
-router.post("/login",(req,res)=>{
-  console.log(req.body)
-})
-
-//母版
-router.get("/one",(req,res)=>{
-  res.render("pages/one",{layout:"layout"})
-})
-
-router.get("/two",(req,res)=>{
-    res.render("pages/two",{layout:"layout"})
-})
 
 //上传相片路径（参照官方文档配置）
-router.all("/ueditor/ue", ueditor(path.resolve(__dirname,"..", 'public'), (req, res, next)=> {
+router.all("/ueditor/ue", ueditor(path.resolve(__dirname, "..", 'public'), (req, res) => {
     // ueditor 客户发起上传图片请求
     if (req.query.action === 'uploadimage') {
         var foo = req.ueditor;
         var imgname = req.ueditor.filename;
         console.log(imgname)
-        var img_url = '/images/ueditor/' ;
+        var img_url = '/images/ueditor/';
         res.ue_up(img_url); //你只要输入要保存的地址 。保存操作交给ueditor来做
     }
     //  客户端发起图片列表请求

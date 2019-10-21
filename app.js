@@ -8,8 +8,8 @@ var hbs = require("hbs")
 var indexRouter = require('./controllers/index');
 var usersRouter = require('./controllers/users');
 var productRouter = require('./controllers/product');
-var orderRouter = require('./controllers/order');
 var loginRouter = require("./controllers/login")
+var authRouter = require("./controllers/authorizition")
 
 var app = express();
 
@@ -38,8 +38,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use("/product",productRouter)
-app.use("/order",orderRouter)
 app.use("/login",loginRouter)
+app.use("/auth",authRouter)
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

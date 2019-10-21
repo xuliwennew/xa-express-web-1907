@@ -8,7 +8,7 @@
  */
 
 //引于连接成功的mongoose
-const mongoose = require("./DBConfig")
+const mongoose = require("./dbConfig")
 
 const Schema = mongoose.Schema;
 //生成一个nodejs中的数据库集合的代理
@@ -24,12 +24,12 @@ module.exports = {
 
     /**
      * 添加一个商品
-     * @param product
+     * @param product generator
      */
-    addProduct(item,cb){
+    async addItem(item){
         //初始化数据
        let product = new ProductModel(item)
-       product.save(cb)
+       await product.save() //blocking io
 
     },
 
@@ -37,15 +37,15 @@ module.exports = {
      * 根据条件更新商品信息
      * db.products.update({k:v,k1:v1},{$set:{k:v,k2:v2}})
      */
-    updateProductByWhere(where,setObj,cb){
-       ProductModel.updateOne(where,{$set:setObj},cb)
+    async updateByWhere(where,setObj){
+       await ProductModel.updateOne(where,{$set:setObj})
     },
 
     /**
      * 根据条件查询商品
      */
-    queryByWhere(where,cb){
-       ProductModel.find(where).exec(cb)
+    async queryByWhere(where){
+      await ProductModel.find(where).exec()
     },
 
     /**
@@ -54,16 +54,16 @@ module.exports = {
      * @param pageSize
      * @param where
      */
-    queryByPager(pageIndex=0,pageSize=10,where,cb){
-       ProductModel.find(where).skip(pageIndex *pageSize).limit(pageSize).exec(cb)
+    async queryByPager(pageIndex=0,pageSize=10,where){
+       return await ProductModel.find(where).skip(pageIndex * pageSize).limit(pageSize).exec()
     },
 
     /**
      * 根据条件进行删除
      * db.products.deleteOne({id:11})
      */
-    deleteProductByWhere(where,cb){
-       ProductModel.deleteOne(where,cb)
+    async deleteByWhere(where){
+       return await ProductModel.deleteOne(where)
     }
 
 

@@ -1,4 +1,4 @@
-const ProductModel = require("../models/ProductModel")
+const ProductModel = require("../models/productModel")
 
 let item = {
     title:"iphone X",
@@ -18,10 +18,14 @@ let item = {
 //     console.log(results)
 // })
 
-// ProductModel.queryByPager(1,1,{},(err,results)=>{
+
+// async function getAll() {
+//    return await ProductModel.queryByPager(1,1,{})
+// }
+
+
+
+
+// ProductModel.deleteProductByWhere({title:"iphone X"},(err,results)=>{
 //     console.log(results)
 // })
-
-ProductModel.deleteProductByWhere({title:"iphone X"},(err,results)=>{
-    console.log(results)
-})

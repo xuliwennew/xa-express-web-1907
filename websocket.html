@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=11,IE=10,IE=9,IE=8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+    <title>测试websocket</title>
+</head>
+<body>
+<h1>1907聊天室</h1>
+<ul id="list" style="height: 500px;overflow:auto"></ul>
+
+
+<hr>
+<textarea cols="100" rows="10" id="msgs"></textarea>
+<button id="send" onclick="sendMsg()">发送</button>
+<input type="file" id="f1" onchange="sendImg()">
+<img src="" id="preview" style="width:100px;height:100px">
+
+<script>
+    //创建一个websocket对象
+    var websocket = new WebSocket("ws://localhost:8080")
+
+    initSocket()
+
+    function initSocket(){
+        //step2: 监听websocket对象的连接成功的信息
+        websocket.onopen = function (e) {
+            console.log("客户端连接成功了！")
+
+        }
+    }
+
+    //step3 在客户端监听服务器的数据发送
+    websocket.onmessage = function (e) {
+        console.log(e.data)
+        let data = JSON.parse(e.data)
+        var list = document.querySelector("#list")
+        var li = document.createElement("li")
+        if(data.flag == "txt"){
+            li.innerText="收到：" + e.data.data;
+        }else if(data.flag == "img"){
+            var img = document.createElement("img")
+            img.src = data.data;
+            li.appendChild(img)
+        }
+        list.appendChild(li);
+    }
+
+    function sendMsg() {
+        var msg = document.querySelector("#msgs").value;
+        websocket.send(JSON.stringify({flag:"txt",data:msg}))
+    }
+
+    function sendImg() {
+        var f1 = document.querySelector("#f1").files[0];
+        console.log(f1)
+        var img = document.querySelector("#preview")
+        var reader  = new FileReader() //文件流
+        reader.readAsDataURL(f1)
+        reader.onload = function (e) {
+            console.log(reader.result)
+            img.src = reader.result
+            websocket.send(JSON.stringify({flag:"img",data:reader.result}))
+        }
+
+    }
+
+
+</script>
+</body>
+</html>

@@ -10,12 +10,17 @@
     "debug": "~2.6.9",
     "ejs": "~2.6.1",
     "express": "~4.16.1",
+    "express-jwt": "^5.3.1",
     "express-session": "^1.17.0",
     "formidable": "^1.2.1",
     "hbs": "^4.0.6",
     "http-errors": "~1.6.3",
+    "ioredis": "^4.14.1",
+    "jsonwebtoken": "^8.5.1",
+    "jwt-redis": "^5.0.9",
     "mongoose": "^5.7.5",
     "morgan": "~1.9.1",
-    "ueditor": "^1.2.3"
+    "ueditor": "^1.2.3",
+    "ws": "^7.2.0"
   }
 }

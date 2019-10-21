@@ -1,0 +1,75 @@
+
+单店铺数据库设计 taobao 多店铺
+shop-admin
+
+1、店铺信息  shops
+   title    店铺名称
+   category 店铺分类
+   address  店铺地址
+   shopPhotos: 店铺图片列表
+   mobile   店铺客服电话
+   detail   店铺的详细介绍
+   mapPoint: 店铺的坐标位置
+
+2、产品分类信息 categories
+   title: String 分类名称
+   desc: string  分类说明
+   pic: Object { small:String,big:String} 分类图片
+
+3、产品信息  products
+   title     产品名称
+   profile   产品介绍
+   details   产品详情(图文信息)
+   price     价格
+   discount  折扣 2折
+   pic : { small:string , bigs:[] } 产品图片
+   support: [] : 如货到付款,7天无理由退货 99元免基础运费(20kg内)
+   weight:   商品重量
+   params   { 包装清单, }   规格参数
+   sale-services { }       售后保障
+   categoriesid  分类编号id
+
+4、用户信息      users
+   mobile   用户手机号
+   password 密码
+   username 用户名
+   regDate  注册时间
+
+5、用户收货地址  address
+   name   收货人名称
+   mobile 收货人电话
+   city   所在省市区
+   address 地址
+   tag     标签 家，公司
+
+5、购物车信息 carts
+   productid  商品编号
+   num   商品数量
+
+6、用户订单信息 orders
+   orderNo:  订单编号
+   totalPrice: 订单总价格
+   detail : {
+     address: {} 收货地址
+     deliveryfee : 运费
+     packagefee  包装费用
+     products: [
+      {
+        productid
+        num,
+      }
+     ]
+     coupon:{} 优惠卷
+   }
+   orderStatus: 支付状态：已支付，未支付，
+   addDate : 下订单时间
+
+
+UML united marklanguage 用图型的方式对软件进行描述
+1.流程图 业务的流程过程
+2.用例图 用户的需求
+  买家，卖家,中间商 供应商 ASP.NET MYSQL
+  核心对象 shop product user order
+
+
+建模 模型-数据结构->数据库数据
