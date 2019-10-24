@@ -1,0 +1,39 @@
+
+
+1. commonjs 规则和特点
+   exports module.exports
+   require("path")
+
+2. 使用HTTP模块来实现服务器(了解)
+   2.1 处理不同的类型的静态的资源 image css video
+       fs.createReaderStream
+   2.2 http接收数据 form entype:none x-www-form-urlencoded form-data
+
+3. Restful API 是什么？
+
+4. Express
+   1.Express是一个基于node的一个服务器端的MVC框架(server-side rendering)
+   2.MVC  model view controller  UI层的设计模式
+   3.Express完美实现Restful api / mico service /graphql
+     router.get/post/delete/post("url")
+   4.Expressjs的模板的引擎 engine (ejs handlebars) 绑定template
+   5.express提供的generator express-generator
+   6.Express中的几个核心模块 express-session 处理会话 formidable ueditor
+   7.Express,jwt? jsonwebtoken token的结构｛header,payload,signater(SHA256)｝
+     token 记录用户的登录状态
+     token vs session
+     1.token分布式 session和服务器
+     2.session - cookie www.z.com
+     3.token是可以不放在cookie
+     4.token + redis
+   8.canvas context("2d/webgl") stroke fill
+   9.websocket + nodejs ws
+
+5.Mongodb
+  1.Mongodb 是一个Nosql数据库，Nosql中的面向文档型分布式数据库（document），
+  存储的格式是一个binary json
+  2.Mongodb vs mysql
+  3.Mongodb的集合和文件操作 db.find/delete/update/insertOne
+  4.Mongodb的nodejs驱动 mongoose
+  5.Mongoose的基本用法 mongoose.model("collectoname",schames)
+

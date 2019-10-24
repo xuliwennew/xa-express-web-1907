@@ -5,11 +5,18 @@ shop-admin
 1、店铺信息  shops
    title    店铺名称
    category 店铺分类
+   mapPoint: 店铺的坐标位置
+   logo: 店铺的logos {small,middle,big}
+   backImgs 背景图 {small,big}
    address  店铺地址
-   shopPhotos: 店铺图片列表
+   shopAlbums: 店铺图片列表
    mobile   店铺客服电话
    detail   店铺的详细介绍
-   mapPoint: 店铺的坐标位置
+   addDate  注册的时间
+   status   店铺状态（开通，关闭状态）
+   activities: [] 活动列表
+   notice : 公告
+
 
 2、产品分类信息 categories
    title: String 分类名称

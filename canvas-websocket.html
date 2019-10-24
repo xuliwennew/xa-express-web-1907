@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=11,IE=10,IE=9,IE=8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+    <title>Title</title>
+    <style>
+        canvas {
+            background-color: red;
+        }
+    </style>
+</head>
+<body>
+   <canvas width="800" height="500"></canvas>
+   <button onclick="repaint()">重置画图</button>
+
+<script>
+    /**
+     * 想法：让每一个client都可以根据提供的point(x,y)来完成本地的paint
+     * 1.让每个客户端收到point:(startpoint , endpoint )
+     *
+     */
+
+    var websocket = new WebSocket("ws://localhost:8080")
+
+    initWebSocket()
+
+    function initWebSocket() {
+        websocket.onopen = function (e) {
+            console.log("websocket 连接成功了！")
+        }
+    }
+
+    var canvas = document.querySelector("canvas")
+    //canvas stroke fill
+    var context = canvas.getContext("2d")
+
+    websocket.onmessage = function(e){
+        var point  = JSON.parse(e.data)
+        if(point.flag == "s"){
+            context.beginPath()
+            context.moveTo(point.x,point.y)
+        }else if(point.flag == "e"){
+            context.lineTo(point.x,point.y)
+            context.stroke();
+        }else if(point.flag =="r"){
+            window.location.reload()
+        }
+    }
+
+
+    canvas.onmousedown = function(e){
+        websocket.send(JSON.stringify({flag:"s",x:e.layerX,y:e.layerY}))
+        document.onmousemove = function (e) {
+            websocket.send(JSON.stringify({flag:"e",x:e.layerX,y:e.layerY}))
+        }
+
+        context.closePath()
+
+        document.onmouseup = function (e) {
+            document.onmousemove = null;
+            document.onmouseup = null;
+        }
+    }
+
+    function repaint() {
+       websocket.send(JSON.stringify({flag:"r"}))
+    }
+
+</script>
+</body>
+</html>
