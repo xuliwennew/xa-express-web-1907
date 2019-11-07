@@ -2,16 +2,16 @@ const mongoose = require("./dbConfig")
 const Schema = mongoose.Schema;
 
 let shopSchema = new Schema({
-    title :   {type:String},
+    title : {type:String},
     category :{type:String},
-    mapPoint:{type:Array},
-    logos:   {type:Object},
-    backImgs :{type:Object},
+    coordinate:{type:Array},
+    logo:   {type:Object},    //多个图片
+    headerImg :{type:Object}, //多个图片
     address :{type:String},
-    shopAlbums:{type:Array},
+    shopAlbums:{type:Array},  //多个图片
     mobile   :{type:String},
     detail  :{type:String},
-    addDate  :{type:String},
+    addDate  :{type:String},  //添加时间
     status   :{type:String},
     activities:{type:Array},
     notice :{type:String},
